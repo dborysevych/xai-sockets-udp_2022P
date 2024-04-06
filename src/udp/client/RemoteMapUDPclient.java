@@ -72,27 +72,38 @@ public class RemoteMapUDPclient {
 		LSimLogger.log(Level.TRACE, "server_port: " + server_port);
 
 		DatagramSocket socket = null;
-		String resposta = null;
+		String respond = null;
+		String message = "";
 		
 		/* TODO: implementació de la part client UDP / implement UDP client's side / implementación de la parte cliente UDP */
 		
 		try {
-			socket = new DatagramSocket(server_port, InetAddress.getByName(server_address));
 			
-            byte[] message = key.getBytes();
-            DatagramPacket packet  = new DatagramPacket(message, message.length);
+	        InetAddress adr = InetAddress.getByName(server_address);;
+	        byte[] message_bytes = new byte[256];
+	        DatagramPacket packet;
+	        
+            socket = new DatagramSocket(); 
+            message = key;
+            message_bytes = message.getBytes();
+            packet = new DatagramPacket(message_bytes, message.length(),
+            		adr, server_port);
+            socket.send(packet);
+            
+            message_bytes = new byte[256];
+            packet = new DatagramPacket(message_bytes, 256);
             socket.receive(packet);
             
-            resposta = new String(packet.getData());
+            
+            respond = new String(packet.getData());
 			
-		} catch (SocketException e) { 
+		} catch (Exception e) { 
 		    System.err.println(e);
-		} catch (UnknownHostException e) {
-			System.err.println(e);
-		} catch (IOException e) {
-			System.err.println(e);
+		} finally {
+			if(socket != null)
+	        	socket.close();
 		}
 		
-		return resposta;
+		return respond;
 	}
 }

@@ -22,8 +22,10 @@
 package udp.servidor;
 
 import java.nio.ByteBuffer;
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -56,22 +58,34 @@ public class RemoteMapUDPservidor {
 				); 
 
 		// Implementation of the server
-		DatagramSocket socket = null;
+		DatagramSocket socket;
+		byte[] message_bytes;
+		DatagramPacket packet;
+		String message;
+		String value;
 		
-		/* TODO: implementació de la part servidor UDP / implementation of UDP server's side / implementación de la parte servidor UDP */
 		try {
-			socket = new DatagramSocket(port);
-            byte[] message = new byte[256];
-            DatagramPacket packet = new DatagramPacket(message, 256);
-            socket.receive(packet);
+			socket = new DatagramSocket(server_port);
+			message_bytes = new byte[256];
+			packet = new DatagramPacket(message_bytes, 256);
             
-            String key = new String(packet.getData());
-            String value = map.get(key);
-            byte[] message = value.getBytes();
-            DatagramPacket packet = new DatagramPacket(message, 256);
             socket.receive(packet);
-			
-		}
+            message = new String(packet.getData(), 0, packet.getLength());
+           
+            value = map.get(message);
+            LSimLogger.log(Level.INFO, "map: " + value);
+            message_bytes = value.getBytes();
+            
+            packet = new DatagramPacket(message_bytes, value.length(), 
+            		packet.getAddress(), packet.getPort());
+            socket.send(packet);
+	    
+	        socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+        
+		
 	
 	}
 }

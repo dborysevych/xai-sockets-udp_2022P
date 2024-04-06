@@ -1,0 +1,4 @@
+06-04-2024 11:18:17:820 udp_servidor [INFO] : inici servidor
+06-04-2024 11:18:17:827 udp_servidor [INFO] : Inici RemoteMapUDPservidor 
+06-04-2024 11:18:17:828 udp_servidor [INFO] : server_port: 5836
+06-04-2024 11:18:17:828 udp_servidor [INFO] : map: {k1=One, k3=Eleven, k4=Twenty-one}
