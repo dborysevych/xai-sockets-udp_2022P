@@ -58,7 +58,7 @@ public class RemoteMapUDPservidor {
 				); 
 
 		// Implementation of the server
-		DatagramSocket socket;
+		DatagramSocket socket = null;
 		byte[] message_bytes;
 		DatagramPacket packet;
 		String message;
@@ -66,24 +66,30 @@ public class RemoteMapUDPservidor {
 		
 		try {
 			socket = new DatagramSocket(server_port);
+			socket.setSoTimeout(90000); // Set timeout to 10000 milliseconds
 			message_bytes = new byte[256];
 			packet = new DatagramPacket(message_bytes, 256);
             
-            socket.receive(packet);
-            message = new String(packet.getData(), 0, packet.getLength());
-           
-            value = map.get(message);
-            LSimLogger.log(Level.INFO, "map: " + value);
-            message_bytes = value.getBytes();
-            
-            packet = new DatagramPacket(message_bytes, value.length(), 
-            		packet.getAddress(), packet.getPort());
-            socket.send(packet);
+			while(true) {
+	            socket.receive(packet);
+	            
+	            message = new String(packet.getData(), 0, packet.getLength());
+	           
+	            value = map.get(message);
+	            LSimLogger.log(Level.INFO, "map: " + value);
+	            message_bytes = value.getBytes();
+	            
+	            packet = new DatagramPacket(message_bytes, value.length(), 
+	            		packet.getAddress(), packet.getPort());
+	            socket.send(packet);
+			}
 	    
-	        socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}  finally {
+			if(socket != null)
+	        	socket.close();
+		}
         
 		
 	
