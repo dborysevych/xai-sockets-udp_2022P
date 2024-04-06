@@ -56,7 +56,22 @@ public class RemoteMapUDPservidor {
 				); 
 
 		// Implementation of the server
-
+		DatagramSocket socket = null;
+		
 		/* TODO: implementació de la part servidor UDP / implementation of UDP server's side / implementación de la parte servidor UDP */
+		try {
+			socket = new DatagramSocket(port);
+            byte[] message = new byte[256];
+            DatagramPacket packet = new DatagramPacket(message, 256);
+            socket.receive(packet);
+            
+            String key = new String(packet.getData());
+            String value = map.get(key);
+            byte[] message = value.getBytes();
+            DatagramPacket packet = new DatagramPacket(message, 256);
+            socket.receive(packet);
+			
+		}
+	
 	}
 }
