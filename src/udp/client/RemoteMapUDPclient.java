@@ -76,6 +76,22 @@ public class RemoteMapUDPclient {
 		
 		/* TODO: implementació de la part client UDP / implement UDP client's side / implementación de la parte cliente UDP */
 		
+		try {
+			socket = new DatagramSocket(server_port, InetAddress.getByName(server_address));
+			
+            byte[] message = key.getBytes();
+            DatagramPacket packet  = new DatagramPacket(message, message.length);
+            socket.receive(packet);
+            
+            resposta = new String(packet.getData());
+			
+		} catch (SocketException e) { 
+		    System.err.println(e);
+		} catch (UnknownHostException e) {
+			System.err.println(e);
+		} catch (IOException e) {
+			System.err.println(e);
+		}
 		
 		return resposta;
 	}
