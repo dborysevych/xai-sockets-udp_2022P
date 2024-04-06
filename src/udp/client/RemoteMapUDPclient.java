@@ -95,10 +95,10 @@ public class RemoteMapUDPclient {
             socket.receive(packet);
             
             
-            respond = new String(packet.getData());
+            respond = new String(packet.getData(), 0, packet.getLength());
 			
 		} catch (Exception e) { 
-		    System.err.println(e);
+			e.printStackTrace();
 		} finally {
 			if(socket != null)
 	        	socket.close();
