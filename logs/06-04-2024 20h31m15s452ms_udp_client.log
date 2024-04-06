@@ -1,0 +1,26 @@
+06-04-2024 20:31:15:667 udp_client [INFO] : inici client
+06-04-2024 20:31:15:673 udp_client [TRACE] : [1] Query for key k1 at localhost:5836
+06-04-2024 20:31:15:673 udp_client [INFO] : inici RemoteMapUDPclient.get 
+06-04-2024 20:31:15:673 udp_client [TRACE] : key: k1
+06-04-2024 20:31:15:673 udp_client [TRACE] : server_address: localhost
+06-04-2024 20:31:15:673 udp_client [TRACE] : server_port: 5836
+06-04-2024 20:31:15:758 udp_client [TRACE] : [1] RemoteMap(k1): One
+06-04-2024 20:31:15:758 udp_client [TRACE] : [2] Query for key k2 at localhost:5838
+06-04-2024 20:31:15:758 udp_client [INFO] : inici RemoteMapUDPclient.get 
+06-04-2024 20:31:15:758 udp_client [TRACE] : key: k2
+06-04-2024 20:31:15:758 udp_client [TRACE] : server_address: localhost
+06-04-2024 20:31:15:758 udp_client [TRACE] : server_port: 5838
+06-04-2024 20:31:15:761 udp_client [TRACE] : [2] RemoteMap(k2): Thirty
+06-04-2024 20:31:15:761 udp_client [TRACE] : [3] Query for key k3 at localhost:5836
+06-04-2024 20:31:15:761 udp_client [INFO] : inici RemoteMapUDPclient.get 
+06-04-2024 20:31:15:761 udp_client [TRACE] : key: k3
+06-04-2024 20:31:15:761 udp_client [TRACE] : server_address: localhost
+06-04-2024 20:31:15:761 udp_client [TRACE] : server_port: 5836
+06-04-2024 20:31:15:763 udp_client [TRACE] : [3] RemoteMap(k3): Eleven
+06-04-2024 20:31:15:763 udp_client [TRACE] : [4] Query for key k4 at localhost:5836
+06-04-2024 20:31:15:763 udp_client [INFO] : inici RemoteMapUDPclient.get 
+06-04-2024 20:31:15:763 udp_client [TRACE] : key: k4
+06-04-2024 20:31:15:763 udp_client [TRACE] : server_address: localhost
+06-04-2024 20:31:15:763 udp_client [TRACE] : server_port: 5836
+06-04-2024 20:31:15:764 udp_client [TRACE] : [4] RemoteMap(k4): Twenty-one
+06-04-2024 20:31:15:764 udp_client [INFO] : map: {k1=One, k2=Thirty, k3=Eleven, k4=Twenty-one}
